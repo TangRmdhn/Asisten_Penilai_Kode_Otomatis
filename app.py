@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from groq import Groq
 
 # Import fungsi-fungsi dari file 'otak'
-from penilai_otomatis_groq import (baca_soal_pdf, proses_file_zip_realtime)
+from penilai_otomatis import (baca_soal_pdf, proses_file_zip_realtime)
 
 # Load environment variables dari file .env
 load_dotenv()
