@@ -1,0 +1,17 @@
+# Requirements untuk Asisten Penilai Kode Otomatis
+
+# Core dependencies
+streamlit>=1.28.0
+groq>=0.4.0
+python-dotenv>=1.0.0
+
+# PDF processing
+pypdf>=3.17.0
+PyPDF2>=3.0.1
+
+# Data processing
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# Optional: untuk development
+# watchdog>=3.0.0  # untuk auto-reload streamlit
