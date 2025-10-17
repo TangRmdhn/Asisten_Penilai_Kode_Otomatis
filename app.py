@@ -92,7 +92,8 @@ st.sidebar.markdown("[Model Benchmark](https://console.groq.com/models)")
 
 # --- Judul Utama ---
 st.title("⚡ Asisten Penilai Kode Otomatis")
-st.markdown("Didukung oleh **Groq** untuk penilaian super cepat dengan AI.")
+st.markdown("Langkah-langkah Penggunaan :")
+st.markdown("1. Upload soal, bisa berupa teks atau upload pdf\n2. Tambahkan Kriteria Penilaian (Opsional)\n3. Upload kumpulan file jawaban yang masukan ke .zip")
 
 # --- Layout Utama dengan Kolom ---
 col1, col2 = st.columns([1, 1.5])
