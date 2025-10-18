@@ -1,207 +1,195 @@
 ﻿# ⚡ Asisten Penilai Kode Otomatis
 
-Aplikasi berbasis web untuk menilai tugas pemrograman secara otomatis menggunakan AI dari **Groq**. Sistem ini dapat membaca soal dari PDF atau teks langsung, kemudian menilai file-file kode yang dikumpulkan dalam format ZIP secara batch dengan feedback yang detail.
+Aplikasi web untuk menilai tugas pemrograman secara otomatis menggunakan AI dari **Groq**. Sistem ini dapat membaca soal dari PDF atau teks, kemudian menilai *batch* file kode (dalam `.zip`) dan memberikan *feedback* mendetail beserta skor untuk setiap file.
+
+<br>
 
 ## ✨ Fitur Utama
 
-- 🤖 **Penilaian AI Otomatis** - Menggunakan model LLM dari Groq untuk penilaian yang konsisten
-- 📄 **Dukungan PDF** - Baca soal langsung dari file PDF
-- 📦 **Batch Processing** - Nilai banyak file sekaligus dari ZIP
-- ⚡ **Real-time Progress** - Lihat progress penilaian secara langsung
-- 📊 **Ekspor Excel** - Unduh hasil penilaian dalam format .xlsx
-- 🎨 **UI Modern** - Interface yang intuitif dengan Streamlit
-- 🔧 **Konfigurasi Fleksibel** - Pilih model dan atur temperature sesuai kebutuhan
+  - 🤖 **Penilaian AI Otomatis**: Menggunakan model LLM super cepat dari Groq untuk penilaian yang akurat dan konsisten.
+  - 📄 **Dukungan PDF & Teks**: Baca soal langsung dari file `.pdf` atau salin-tempel teks soal.
+  - 📦 **Batch Processing**: Nilai puluhan atau ratusan file tugas sekaligus hanya dengan satu file `.zip`.
+  - ⚡ **Real-time Progress**: Lihat progres penilaian dan hasil yang masuk satu per satu secara *live*.
+  - 📊 **Statistik & Visualisasi**: Dapatkan ringkasan statistik (rata-rata, tertinggi, terendah) dan tabel hasil berkode warna.
+  - 📤 **Ekspor Hasil**: Unduh laporan penilaian lengkap dalam format `.xlsx` (Excel) atau `.csv`.
+  - 🔧 **Konfigurasi Model**: Pilih model Groq yang paling sesuai dengan kebutuhan Anda, dari yang tercepat hingga yang paling akurat.
 
-## 📋 Prerequisites
+## 🚀 Instalasi & Setup
 
-- Python 3.8 atau lebih tinggi
-- API Key dari [Groq](https://console.groq.com/keys) (gratis)
-- pip (Python package manager)
+Ini adalah panduan lengkap untuk menjalankan aplikasi di komputer lokal Anda.
 
-## 🚀 Instalasi
+### Prasyarat
 
-### 1. Clone Repository
+  - **Python 3.8** atau versi lebih baru.
+  - **API Key Groq**: Anda bisa mendapatkannya secara gratis di [Groq Console](https://console.groq.com/keys).
+
+-----
+
+### Langkah 1: Clone Repository
+
+Buka terminal atau Command Prompt, lalu *clone* repository ini ke komputer Anda dan masuk ke direktorinya.
 
 ```bash
 git clone https://github.com/username/asisten-penilai-kode.git
 cd asisten-penilai-kode
 ```
 
-### 2. Install Dependencies
+*(Ganti `username/asisten-penilai-kode` dengan URL repository Anda yang sebenarnya)*
+
+### Langkah 2: Buat Virtual Environment (Sangat Direkomendasikan)
+
+Membuat *virtual environment* (venv) adalah *best practice* untuk mengisolasi *dependency* project Anda.
+
+```bash
+# Buat venv di folder bernama 'venv'
+python -m venv venv
+```
+
+Selanjutnya, aktifkan venv tersebut:
+
+  - **Windows (Command Prompt):**
+    ```bash
+    venv\Scripts\activate
+    ```
+  - **macOS / Linux (Bash):**
+    ```bash
+    source venv/bin/activate
+    ```
+
+Anda akan melihat `(venv)` di awal baris terminal jika berhasil.
+
+### Langkah 3: Install Dependencies
+
+Pastikan venv Anda aktif, lalu install semua *library* yang dibutuhkan dari `requirements.txt`.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Konfigurasi API Key
+### Langkah 4: Konfigurasi API Key
 
-Buat file `.env` di root directory project:
+Aplikasi ini membaca API Key dari file `.env`.
 
-```bash
-touch .env
-```
+1.  Buat file baru bernama `.env` di dalam folder utama project (di lokasi yang sama dengan `app.py`).
+2.  Buka file `.env` tersebut dengan teks editor dan tambahkan baris berikut:
 
-Edit file `.env` dan tambahkan API key Groq Anda:
+<!-- end list -->
 
 ```env
 GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-> **Cara mendapatkan API Key:**
-> 1. Kunjungi [console.groq.com](https://console.groq.com/keys)
-> 2. Login atau buat akun (gratis)
-> 3. Generate API key baru
-> 4. Copy dan paste ke file `.env`
+Ganti `gsk_xxxxxxxx...` dengan API Key Groq yang sudah Anda dapatkan dari [Groq Console](https://console.groq.com/keys).
 
 ## 💻 Menjalankan Aplikasi
+
+Setelah semua setup selesai, jalankan aplikasi menggunakan Streamlit:
 
 ```bash
 streamlit run app.py
 ```
 
-Aplikasi akan terbuka otomatis di browser pada alamat `http://localhost:8501`
+Aplikasi akan otomatis terbuka di browser Anda (biasanya di `http://localhost:8501`).
 
 ## 📖 Cara Penggunaan
 
-### 1. Input Soal
+1.  **Input Soal**: Di sisi kiri, pilih tab "Input Teks" untuk mengetik soal, atau "Upload PDF" untuk mengunggah file soal.
+2.  **Kriteria Tambahan (Opsional)**: Masukkan poin-poin penting yang harus dinilai oleh AI (contoh: "Wajib menggunakan rekursif", "Nama variabel harus jelas").
+3.  **Upload File Tugas**: Kompres semua file kode siswa (misal: `Ahmad.py`, `Budi.py`) ke dalam **satu file .zip** lalu unggah file ZIP tersebut.
+4.  **Pilih Model (Opsional)**: Di sidebar kiri, Anda bisa memilih model AI yang ingin digunakan.
+5.  **Mulai Penilaian**: Klik tombol **"🚀 Mulai Penilaian"**.
+6.  **Lihat Hasil**: Hasil akan muncul satu per satu di tabel sebelah kanan secara *real-time*. Tabel akan diberi kode warna untuk memudahkan analisis.
+7.  **Download Laporan**: Setelah selesai, statistik penilaian akan muncul. Gunakan tombol "Download Excel" atau "Download CSV" untuk menyimpan laporan.
 
-Anda memiliki 2 pilihan untuk memasukkan soal:
+**Struktur `.zip` yang Disarankan:**
 
-- **Input Teks Langsung**: Ketik atau paste soal langsung ke text area
-- **Upload PDF**: Upload file PDF yang berisi soal
-
-### 2. Tambahkan Kriteria (Opsional)
-
-Masukkan kriteria penilaian tambahan, contoh:
-```
-- Gunakan fungsi rekursif (wajib)
-- Kode harus memiliki komentar
-- Implementasi error handling
-- Nama variabel harus deskriptif
-```
-
-### 3. Upload File Tugas
-
-- Kumpulkan semua file tugas dalam satu folder
-- Compress folder tersebut menjadi file `.zip`
-- Upload file ZIP melalui tombol upload
-
-**Struktur ZIP yang disarankan:**
 ```
 tugas_mahasiswa.zip
 ├── 2024001_Ahmad.py
 ├── 2024002_Budi.py
-├── 2024003_Citra.py
+├── SubFolder/2024003_Citra.py  <-- (Aplikasi bisa membaca file di dalam sub-folder)
 └── ...
 ```
 
-### 4. Mulai Penilaian
-
-Klik tombol **"🚀 Mulai Penilaian"** dan tunggu prosesnya selesai.
-
-### 5. Lihat & Download Hasil
-
-- Hasil akan ditampilkan dalam bentuk tabel dengan color coding:
-  - 🟢 Hijau: Nilai ≥ 85 (Excellent)
-  - 🟡 Kuning: Nilai 70-84 (Good)
-  - 🟠 Orange: Nilai 50-69 (Fair)
-  - 🔴 Merah: Nilai < 50 (Need Improvement)
-
-- Download hasil dalam format Excel untuk dokumentasi
-
 ## ⚙️ Konfigurasi Lanjutan
 
-### Model yang Tersedia
+### Pilihan Model
 
-| Model | Kelebihan | Rekomendasi |
-|-------|-----------|-------------|
-| `llama-3.3-70b-versatile` | Paling akurat, balanced | ✅ Recommended |
-| `llama-3.2-90b-text-preview` | Model terbesar, paling detail | Heavy tasks |
-| `gpt-oss-120b` | Model GPT open source, sangat powerful | Advanced grading |
-| `mixtral-8x7b-32768` | Context window besar | Long code |
-| `gemma2-9b-it` | Cepat, efisien | Quick grading |
-| `gemma-7b-it` | Paling cepat | Batch besar |
-### Temperature Settings
+Anda dapat memilih model yang berbeda di sidebar. Setiap model memiliki kelebihan:
 
-- **0.0 - 0.3**: Konsisten, objektif (recommended untuk penilaian)
-- **0.4 - 0.7**: Balanced
-- **0.8 - 1.0**: Kreatif, variatif (tidak disarankan untuk penilaian)
+| Model | Keterangan |
+| :--- | :--- |
+| `openai/gpt-oss-120b` | ✅ **Default & Recommended**. Model terbesar & terbaik untuk akurasi tinggi. |
+| `llama-3.3-70b-versatile` | ⚡ Model cepat dengan performa bagus. |
+| `llama-3.2-90b-text-preview` | 🔬 Model eksperimental dengan 90B parameter. |
+| `llama-3.1-70b-versatile` | 💪 Model stabil untuk berbagai tugas. |
+| `mixtral-8x7b-32768` | 🎯 Model MoE dengan konteks panjang (cocok untuk kode yang sangat panjang). |
+| `gemma2-9b-it` | 💎 Model ringan dari Google, sangat cepat. |
+| `gemma-7b-it` | ⚡ Model paling ringan & tercepat (cocok untuk *batch* sangat besar). |
+
+### Temperature
+
+Saat ini, `temperature` diatur statis ke **`0.1`** di dalam `app.py`. Nilai yang rendah ini dipilih untuk memastikan AI memberikan penilaian yang konsisten, objektif, dan tidak terlalu "kreatif" antar file.
 
 ## 📁 Struktur Project
 
 ```
 asisten-penilai-kode/
 │
-├── app.py                    # Main application (UI)
-├── penilai_otomatis_groq.py      # Core logic (backend)
-├── requirements.txt               # Python dependencies
-├── .env                          # API configuration (create this)
-├── .gitignore                    # Git ignore file
-└── README.md                     # Documentation
+├── .devcontainer/              # Konfigurasi untuk VS Code Dev Containers
+├── .streamlit/               # Konfigurasi Streamlit (jika ada)
+├── venv/                       # Folder virtual environment (setelah setup)
+│
+├── app.py                      # File utama (UI Streamlit)
+├── penilai_otomatis.py         # Logika inti (backend) penilaian & Groq API
+├── requirements.txt            # Daftar dependency Python
+├── .env                        # File konfigurasi API key (perlu dibuat manual)
+├── .gitignore                  # File yang diabaikan oleh Git
+└── README.md                   # Dokumentasi ini
 ```
 
 ## 🔧 Troubleshooting
 
-### Error: "API Key tidak valid"
-- Pastikan API key di `.env` sudah benar
-- Cek apakah file `.env` berada di root directory
-- Restart aplikasi setelah mengubah `.env`
+  - **Error: "API Key tidak valid"**
 
-### Error: "File ZIP tidak valid"
-- Pastikan file yang diupload adalah format `.zip`
-- Jangan gunakan format `.rar`, `.7z`, atau format lainnya
-- Compress ulang dengan tools seperti WinRAR, 7-Zip, atau built-in OS
+      - Pastikan file `.env` sudah benar-benar bernama `.env` (bukan `.env.txt`).
+      - Pastikan file `.env` ada di *root directory* (sejajar dengan `app.py`).
+      - Pastikan API Key di-salin dengan benar tanpa spasi tambahan.
+      - **Restart aplikasi** setelah mengubah `.env`.
 
-### Error: "Cannot decode file"
-- Pastikan file kode menggunakan encoding UTF-8
-- File yang corrupt tidak akan diproses (akan diberi nilai 0)
+  - **Error: "File ZIP tidak valid"**
 
-### Aplikasi Lambat
-- Gunakan model yang lebih kecil (gemma2-9b-it atau gemma-7b-it)
-- Proses file dalam batch yang lebih kecil
-- Pastikan koneksi internet stabil
+      - Pastikan file yang di-upload adalah `.zip`. Format `.rar`, `.7z`, dll. **tidak didukung**.
+      - Coba buat ulang file `.zip` dengan *tool* kompresi standar (bawaan Windows/macOS, 7-Zip).
 
-## 🤝 Contributing
+  - **Error: "Cannot decode file"**
 
-Kontribusi sangat diterima! Silakan:
+      - Ini berarti ada file kode di dalam ZIP yang tidak menggunakan encoding standar (seperti UTF-8).
+      - Aplikasi akan mencoba membacanya sebagai `latin-1`, namun jika tetap gagal, file tersebut akan diberi nilai 0 dengan *feedback* error.
 
-1. Fork repository ini
-2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
+## 🤝 Berkontribusi
 
-## 📝 To-Do List
+Kontribusi sangat diterima\! Jika Anda ingin mengembangkan fitur baru atau memperbaiki bug:
 
-- [ ] Dukungan untuk multiple programming languages
-- [ ] Export ke format PDF
-- [ ] Statistik penilaian yang lebih detail
-- [ ] History penilaian
-- [ ] Kustomisasi rubrik penilaian
-- [ ] Batch API untuk penilaian lebih cepat
-- [ ] Unit testing
-
-## 📄 License
-
-Project ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail.
+1.  *Fork* repository ini.
+2.  Buat *branch* baru (`git checkout -b feature/FiturKeren`).
+3.  *Commit* perubahan Anda (`git commit -m 'Menambahkan FiturKeren'`).
+4.  *Push* ke branch (`git push origin feature/FiturKeren`).
+5.  Buat *Pull Request*.
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@TangRmdhn](https://github.com/TangRmdhn)
-- Email: bintangramadhan0710@gmal.com
+**Bintang Ramadhan**
+
+  - GitHub: [@TangRmdhn](https://github.com/TangRmdhn)
+  - Email: bintangramadhan0710@gmal.com
 
 ## 🙏 Acknowledgments
 
-- [Groq](https://groq.com/) - AI inference platform
-- [Streamlit](https://streamlit.io/) - Web framework
-- [LLaMA](https://ai.meta.com/llama/) - Language model
+  - **[Groq](https://groq.com/)** untuk platform inferensi AI yang luar biasa cepat.
+  - **[Streamlit](https://streamlit.io/)** untuk *framework* aplikasi web Python yang simpel dan keren.
+  - **[Meta AI](https://ai.meta.com/llama/)** & **[Google](https://www.google.com/search?q=https://ai.google/gemma/)** untuk model-model *open-source* yang powerful.
 
-## 📞 Support
+-----
 
-Jika Anda menemukan bug atau memiliki saran, silakan buat [Issue](https://github.com/username/asisten-penilai-kode/issues) di GitHub.
-
----
-⭐ Jika project ini membantu Anda, berikan star di GitHub!
-
-
+⭐ Jika project ini membantu Anda, jangan ragu untuk memberikan *star* di GitHub\!
